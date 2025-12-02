@@ -1,9 +1,9 @@
 <?php
 // Configurações do Banco de Dados
-define('DB_HOST', getenv('DB_HOST') ?: 'mysql');
-define('DB_NAME', getenv('DB_NAME') ?: 'peticao_db');
-define('DB_USER', getenv('DB_USER') ?: 'user');
-define('DB_PASS', getenv('DB_PASS') ?: 'userpassword');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'peticao_db');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 
 // Configurações do Site
 define('SITE_NAME', 'Petição Política');

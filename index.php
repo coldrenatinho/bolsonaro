@@ -1,9 +1,25 @@
+<?php
+// Sistema de rastreamento e anúncios
+require_once 'ad-manager.php';
+require_once 'adsterra-helper.php';
+
+// Rastrear visitante automaticamente
+global $adManager;
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petição Política - Faça sua voz ser ouvida</title>
+    
+    <!-- Google Tag Manager (Exemplo) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -133,12 +149,13 @@
     </style>
 </head>
 <body>
-    <!-- Banner Topo -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+    <!-- Banner Topo - Adsterra 728x90 -->
     <div class="banner-top">
-        <div>
-            <h3 class="text-muted">ESPAÇO PUBLICITÁRIO 728x90</h3>
-            <p class="text-muted mb-0">Seu banner aqui</p>
-        </div>
+        <?php renderAdsterraBanner('banner_top'); ?>
     </div>
 
     <!-- Header/Hero Section -->
@@ -153,11 +170,9 @@
                     </a>
                 </div>
                 <div class="col-lg-4">
+                    <!-- Banner Lateral 1 - Adsterra 300x250 -->
                     <div class="banner-sidebar bg-white">
-                        <div>
-                            <h4 class="text-muted">BANNER 300x250</h4>
-                            <p class="text-muted mb-0">Propaganda</p>
-                        </div>
+                        <?php renderAdsterraBanner('banner_sidebar_1'); ?>
                     </div>
                 </div>
             </div>
@@ -216,22 +231,17 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
+                    <!-- Banner Lateral 2 - Adsterra 160x600 -->
                     <div class="banner-sidebar">
-                        <div>
-                            <h4 class="text-muted">BANNER 300x600</h4>
-                            <p class="text-muted mb-0">Skyscraper</p>
-                        </div>
+                        <?php renderAdsterraBanner('banner_sidebar_2'); ?>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Banner Meio -->
+        <!-- Banner Meio 1 - Adsterra 468x60 -->
         <div class="banner-middle">
-            <div>
-                <h3 class="text-muted">BANNER HORIZONTAL 970x250</h3>
-                <p class="text-muted mb-0">Billboard</p>
-            </div>
+            <?php renderAdsterraBanner('banner_middle_1'); ?>
         </div>
 
         <!-- Galeria de Imagens -->
@@ -392,18 +402,14 @@
                 </div>
                 
                 <div class="col-lg-4">
+                    <!-- Banner Lateral 3 - Adsterra 160x300 -->
                     <div class="banner-sidebar">
-                        <div>
-                            <h4 class="text-muted">BANNER 300x250</h4>
-                            <p class="text-muted mb-0">Medium Rectangle</p>
-                        </div>
+                        <?php renderAdsterraBanner('banner_sidebar_3'); ?>
                     </div>
                     
+                    <!-- Banner Lateral 4 - Adsterra 300x250 -->
                     <div class="banner-sidebar">
-                        <div>
-                            <h4 class="text-muted">BANNER 300x250</h4>
-                            <p class="text-muted mb-0">Medium Rectangle</p>
-                        </div>
+                        <?php renderAdsterraBanner('banner_sidebar_4'); ?>
                     </div>
                 </div>
             </div>
@@ -459,12 +465,9 @@
             </div>
         </section>
 
-        <!-- Banner Rodapé -->
+        <!-- Banner Rodapé - Adsterra 728x90 -->
         <div class="banner-middle">
-            <div>
-                <h3 class="text-muted">BANNER HORIZONTAL 728x90</h3>
-                <p class="text-muted mb-0">Leaderboard</p>
-            </div>
+            <?php renderAdsterraBanner('banner_middle_2'); ?>
         </div>
     </div>
 
@@ -561,5 +564,13 @@
             animateCounter('apoiadores', 758);
         });
     </script>
+    
+    <?php
+    // Popunder Adsterra (carrega após consentimento)
+    renderAdsterraPopunder();
+    
+    // Incluir banner de consentimento de cookies (LGPD)
+    include_once 'cookie-consent.php';
+    ?>
 </body>
 </html>
