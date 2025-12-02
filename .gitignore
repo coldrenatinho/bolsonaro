@@ -1,0 +1,36 @@
+# Arquivo de ambiente com dados sensíveis
+.env
+
+# Arquivos de upload
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+*.log
+error_log
+
+# Cache
+cache/
+tmp/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+.dockerignore
+
+# Banco de dados
+*.sql.backup
+*.sql.gz
+
+# Configurações locais
+config.local.php

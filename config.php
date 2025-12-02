@@ -1,32 +1,42 @@
 <?php
-// Configurações do Banco de Dados
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'peticao_db');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+/**
+ * Configurações do Sistema
+ * Carrega variáveis do arquivo .env
+ */
 
-// Configurações do Site
-define('SITE_NAME', 'Petição Política');
-define('SITE_URL', 'http://localhost');
-define('ADMIN_EMAIL', 'admin@peticao.com.br');
+// Carregar variáveis de ambiente
+require_once __DIR__ . '/env-loader.php';
+
+// Configurações do Banco de Dados (do .env)
+if (!defined('DB_HOST')) define('DB_HOST', env('DB_HOST', 'mysql'));
+if (!defined('DB_NAME')) define('DB_NAME', env('DB_NAME', 'peticao_db'));
+if (!defined('DB_USER')) define('DB_USER', env('DB_USER', 'user'));
+if (!defined('DB_PASS')) define('DB_PASS', env('DB_PASS', 'userpassword'));
+
+// Configurações do Site (do .env)
+if (!defined('SITE_NAME')) define('SITE_NAME', env('SITE_NAME', 'Petição Política'));
+if (!defined('SITE_URL')) define('SITE_URL', env('SITE_URL', 'https://bolsonarolivre.publicvm.com'));
+if (!defined('ADMIN_EMAIL')) define('ADMIN_EMAIL', env('ADMIN_EMAIL', 'admin@exemplo.com'));
 
 // Configurações de Upload
 define('UPLOAD_DIR', 'uploads/galeria/');
-define('MAX_FILE_SIZE', 5 * 1024 * 1024); // 5MB
-define('ALLOWED_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/webp']);
+define('MAX_FILE_SIZE', (int)env('UPLOAD_MAX_SIZE', 5242880)); // 5MB padrão
+$allowedTypesString = env('ALLOWED_IMAGE_TYPES', 'image/jpeg,image/png,image/gif,image/webp');
+define('ALLOWED_TYPES', explode(',', $allowedTypesString));
 
-// Configurações de Email
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_PORT', 587);
-define('SMTP_USER', 'seu-email@gmail.com');
-define('SMTP_PASS', 'sua-senha');
-define('SMTP_FROM', 'noreply@peticao.com.br');
-define('SMTP_FROM_NAME', 'Petição Política');
+// Configurações de Email (do .env)
+if (!defined('SMTP_HOST')) define('SMTP_HOST', env('SMTP_HOST', 'smtp.gmail.com'));
+if (!defined('SMTP_PORT')) define('SMTP_PORT', (int)env('SMTP_PORT', 587));
+if (!defined('SMTP_USER')) define('SMTP_USER', env('SMTP_USER', ''));
+if (!defined('SMTP_PASS')) define('SMTP_PASS', env('SMTP_PASS', ''));
+if (!defined('SMTP_FROM')) define('SMTP_FROM', env('SMTP_FROM', ADMIN_EMAIL));
+if (!defined('SMTP_FROM_NAME')) define('SMTP_FROM_NAME', env('SMTP_FROM_NAME', SITE_NAME));
 
-// Configurações PIX
-define('PIX_KEY', 'sua-chave-pix@email.com');
-define('PIX_NAME', 'Seu Nome Aqui');
-define('PIX_CITY', 'SAO PAULO');
+// Configurações PIX (do .env)
+if (!defined('PIX_KEY')) define('PIX_KEY', env('PIX_KEY', ''));
+if (!defined('PIX_NAME')) define('PIX_NAME', env('PIX_NAME', ''));
+if (!defined('PIX_CITY')) define('PIX_CITY', env('PIX_CITY', 'SAO PAULO'));
+if (!defined('PIX_IDENTIFICADOR')) define('PIX_IDENTIFICADOR', env('PIX_IDENTIFICADOR', 'PETICAO'));
 
 // Timezone
 date_default_timezone_set('America/Sao_Paulo');
