@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.dockerignore
+Dockerfile
+compose.yml
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+
+# Uploads (serão criados pelo container)
+uploads/*
+!uploads/.gitkeep
+
+# Cache
+.DS_Store
+Thumbs.db
